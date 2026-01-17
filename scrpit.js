@@ -18,3 +18,26 @@ function updateUI(prices) {
 }
 
 setInterval(loadPrices, 2000);
+async function loadChart(pair) {
+    let data = await fetch("chartdata.json").then(r => r.json());
+    let candles = data[pair];
+
+    let labels = candles.map(c => new Date(c.time).toLocaleTimeString());
+    let prices = candles.map(c => c.close);
+
+    let ctx = document.getElementById('mainChart').getContext('2d');
+
+    if (window.chart) window.chart.destroy();
+
+    window.chart = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: labels,
+            datasets: [{
+                label: pair,
+                data: prices,
+                borderWidth: 2
+            }]
+        }
+    });
+}

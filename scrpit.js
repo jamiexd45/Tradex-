@@ -16,7 +16,9 @@ function updateUI(prices) {
         if (el) el.innerText = prices[pair];
     }
 }
-
+setInterval(() => {
+    loadChart("XAUUSD");
+}, 2000);
 setInterval(loadPrices, 2000);
 async function loadChart(pair) {
     let data = await fetch("chartdata.json").then(r => r.json());

@@ -1,0 +1,31 @@
+{
+  "market": {
+    "BTCUSD": {
+      "price": 105000,
+      "history": [103000, 104500, 105200, 104800, 105000]
+    },
+    "XAUUSD": {
+      "price": 2450,
+      "history": [2420, 2435, 2440, 2450]
+    },
+    "EURUSD": {
+      "price": 1.08,
+      "history": [1.06, 1.07, 1.075, 1.08]
+    }
+  },
+
+  "users": {
+    "demoUser": {
+      "balance": 10000,
+      "portfolio": {
+        "BTCUSD": 0.02,
+        "XAUUSD": 1
+      }
+    }
+  },
+
+  "admin": {
+    "username": "admin",
+    "password": "1234"
+  }
+}

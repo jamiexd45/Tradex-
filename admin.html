@@ -1,65 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Admin Market Control</title>
-    <style>
-        body {
-            font-family: Arial;
-            background: #0d0f14;
-            color: white;
-            padding: 20px;
-        }
-        .box {
-            background: #1a1d24;
-            padding: 20px;
-            border-radius: 10px;
-            width: 400px;
-        }
-        input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 6px;
-            border: none;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background: #0fa;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        button:hover {
-            background: #0c8;
-        }
-    </style>
-</head>
-<body>
-
-<h2>Admin Login</h2>
-<div class="box" id="loginBox">
-    <input type="password" id="pass" placeholder="Enter Admin Password">
-    <button onclick="login()">Login</button>
-</div>
-
-<div class="box" id="adminPanel" style="display:none;">
-    <h2>Market Controller</h2>
-
-    <label>Forex Pair</label>
-    <input id="pair" placeholder="e.g. USDJPY">
-
-    <label>New Price</label>
-    <input id="price" placeholder="e.g. 150.32">
-
-    <button onclick="updatePrice()">Update Price</button>
-
-    <p id="status"></p>
-</div>
-
 <script>
-const realPass = "admin123"; // change this later!
+const realPass = "admin123"; // change later
 
 function login() {
     if (document.getElementById("pass").value === realPass) {
@@ -71,24 +11,19 @@ function login() {
 }
 
 function updatePrice() {
-    let pair = document.getElementById("pair").value;
+    let pair = document.getElementById("pair").value.toUpperCase();
     let price = document.getElementById("price").value;
 
-    fetch("data.json")
-        .then(r => r.json())
-        .then(data => {
-            data[pair] = price;
+    let updateCommand = {
+        "pair": pair,
+        "price": price,
+        "time": Date.now()
+    };
 
-            fetch("data.json", {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
-            })
-        });
-
-    document.getElementById("status").innerText = "Price Updated!";
+    // Print command for you to copy
+    document.getElementById("status").innerHTML =
+        "COPY THIS → Paste into updates.json:<br><br>" +
+        JSON.stringify(updateCommand, null, 4);
 }
 </script>
 
-</body>
-</html>

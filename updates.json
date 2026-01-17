@@ -1,3 +1,9 @@
 {
-  "commands": []
+  "commands": [
+    {
+      "pair": "USDJPY",
+      "price": "151.32",
+      "time": 1735884000000
+    }
+  ]
 }
